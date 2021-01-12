@@ -32,19 +32,16 @@ Within the addNumbers function, invoke the callback function as many times as ne
 
 Return the modified array.
 ------------------------------------------------------------------------------------------------ */
-/* describe('Testing challenge 2', () => {
-  test('It should add the number 8 to the array five times', () => {
-    expect(addNumbers(8, [], 5, addValues)).toStrictEqual([8, 8, 8, 8, 8]);
-    expect(addNumbers(8, [], 5, addValues).length).toStrictEqual(5);
-  });
-}); */
 const addValues = (arr, value) => {
   arr.push(value);
 
 };
 
 const addNumbers = (num, arr, times, callback) => {
-  // Solution code here...
+  for (let i = 1; i <= times; i++) {
+    callback(arr, num);
+  }
+  return arr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -64,9 +61,14 @@ The inventory is formatted like this:
 
 This function should use forEach to populate your grocery list based on the store's inventory. If the item is available, add it to your list. Return the final list.
 ------------------------------------------------------------------------------------------------ */
-
 const createList = (availableItems) => {
-  // Solution code here...
+  const list = [];
+  availableItems.forEach((item) => {
+    if (item.available === true) {
+      list.push(item.name);
+    }
+  });
+  return list;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -84,7 +86,22 @@ Return the resulting output array.
 ------------------------------------------------------------------------------------------------ */
 
 const fizzbuzz = (arr) => {
-  // Solution code here...
+  const display = [];
+  arr.forEach((num) => {
+    if (num % 15 === 0) {
+      display.push('Fizz Buzz');
+    }
+    else if (num % 3 === 0) {
+      display.push('Fizz');
+    }
+    else if (num % 5 === 0) {
+      display.push('Buzz');
+    }
+    else {
+      display.push(num);
+    }
+  });
+  return display;
 };
 
 /* ------------------------------------------------------------------------------------------------
