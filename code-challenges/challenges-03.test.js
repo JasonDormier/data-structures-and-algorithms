@@ -151,15 +151,16 @@ For example, [1, 14, 0.2, -281, 54782] is only correctly sorted in that order.
 const sortNumbersByLength = (arr) => {
   // Solution code here...
   arr.sort((first, second) => {
-    if (first.length < second.length) {
+    if (first.toString().length > second.toString().length) {
       return 1;
     }
-    else if (first.length > second.length) {
+    else if (first.toString().length < second.toString().length) {
       return -1;
     } else {
       return 0;
     }
   });
+  console.log(arr);
   return arr;
 };
 
@@ -183,6 +184,17 @@ const people = [
 
 const sortPeople = (arr) => {
   // Solution code here...
+  arr.sort((left, right) => {
+    if (left.lastName > right.lastName) {
+      return 1;
+    }
+    else if (left.lastName < right.lastName) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
+  return arr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -197,8 +209,39 @@ If two people have the same full name, the younger one should come first. Do not
 
 const sortPeopleBetter = (arr) => {
   // Solution code here...
-};
+  console.log(arr);
+  //function sortTool(keyword) {
+  arr.sort((left, right) => {
+    if (left.lastName === right.lastName && left.firstName === right.firstName) {
+      if (left.age > right.age) {
+        return 1;
+      } else if (left.age < right.age) {
+        return -1;
+      } else {
+        return 0;
+      }
+    } else if (left.lastName === right.lastName) {
+      if (left.firstName > right.firstName) {
+        return 1;
+      } else if (left.firstName < right.firstName) {
+        return -1;
+      } else {
+        return 0;
+      }
+    } else {
+      if (left.lastName > right.lastName) {
+        return 1;
+      } else if (left.lastName < right.lastName) {
+        return -1;
+      } else {
+        return 0;
+      }
+    }
 
+  });
+  console.log(arr);
+  return arr;
+};
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 10 - Stretch Goal
 
@@ -223,6 +266,18 @@ const meetings = [
 
 const sortMeetingsByDay = (arr) => {
   // Solution code here...
+  //console.log(arr);
+  arr.sort((left, right) => {
+    if (left.dayOfWeek < right.dayOfWeek) {
+      return 1;
+    } else if (left.datOfWeek > right.dayOfWeek) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
+  console.log(arr);
+  return arr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -254,6 +309,9 @@ $ = createSnippetWithJQuery(`
 
 const addPearClass = () => {
   // Solution code here...
+  const $pear = $('li').text('pear');
+  $($pear).addClass('pear');
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -331,7 +389,7 @@ describe('Testing challenge 6', () => {
   });
 });
 
-xdescribe('Testing challenge 7', () => {
+describe('Testing challenge 7', () => {
   test('It should sort numbers by their length', () => {
     expect(sortNumbersByLength([10, 2.8, 1, -47.75])).toStrictEqual([1, 10, 2.8, -47.75]);
     expect(sortNumbersByLength([100, 2.82, 1, -47.75])).toStrictEqual([1, 100, 2.82, -47.75]);
@@ -339,7 +397,7 @@ xdescribe('Testing challenge 7', () => {
   });
 });
 
-xdescribe('Testing challenge 8', () => {
+describe('Testing challenge 8', () => {
   test('It should sort people by their last names', () => {
     expect(sortPeople(people)).toStrictEqual([
       new Person('Casey', 'Codefellow', 38),
@@ -351,7 +409,7 @@ xdescribe('Testing challenge 8', () => {
   });
 });
 
-xdescribe('Testing challenge 9', () => {
+describe('Testing challenge 9', () => {
   test('It should sort people with more strict ordering', () => {
     const family = [
       new Person('Casey', 'Codefellows', 55),
@@ -395,7 +453,7 @@ xdescribe('Testing challenge 11', () => {
   });
 });
 
-xdescribe('Testing challenge 12', () => {
+describe('Testing challenge 12', () => {
   test('It should add a class of pear to the thrid li', () => {
     addPearClass();
     expect($('li:nth-child(3)').hasClass('pear')).toBe(true);
