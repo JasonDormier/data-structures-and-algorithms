@@ -50,8 +50,8 @@ Note: if you ever need to validate an email using a regex in practice, the Inter
 
 const validateEmail = (email) => {
   // Solution code here...
-  const regex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
-  console.log(email);
+  const regex = /@/;
+
   console.log(regex.test(email));
   return regex.test(email);
 
@@ -80,6 +80,8 @@ Return either true or false.
 
 const validatePhoneNumber = (phoneNumber) => {
   // Solution code here...
+  const regex = /^(\D[\d]{3}[)]|[\d]{3})[ -]?\d{3}[- ]?\d{4}$/;
+  return regex.test(phoneNumber);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -158,7 +160,7 @@ xdescribe('Testing challenge 3', () => {
   });
 });
 
-xdescribe('Testing challenge 4', () => {
+describe('Testing challenge 4', () => {
   test('It should match the acceptable phone number formats', () => {
     expect(validatePhoneNumber('(555) 555-5555')).toBeTruthy();
     expect(validatePhoneNumber('555 555-5555')).toBeTruthy();
