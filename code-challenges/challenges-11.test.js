@@ -50,11 +50,8 @@ Note: if you ever need to validate an email using a regex in practice, the Inter
 
 const validateEmail = (email) => {
   // Solution code here...
-  const regex = /@/;
-
-  console.log(regex.test(email));
+  const regex = /^\w+[\w||.]\w+@\w*.(net|com|org)$/;
   return regex.test(email);
-
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -130,7 +127,7 @@ describe('Testing challenge 2', () => {
   });
 });
 
-xdescribe('Testing challenge 3', () => {
+describe('Testing challenge 3', () => {
   test('It should match a basic email', () => {
     expect(validateEmail('joe@codefellows.com')).toBeTruthy();
   });
