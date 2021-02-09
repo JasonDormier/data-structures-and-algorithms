@@ -38,17 +38,11 @@ const cookieStores = [firstPike, seaTac, seattleCenter, capHill, alkiBeach];
 
 const grandTotal = (stores) => {
   // Solution code here...
-  //console.log(stores);
-  //let totalOfTotals;
-  for (let i = 0; i < hoursOpen.length; i++) {
-    let hourlyTotals;
-    for (let j = 0; j < stores.length; i++) {
-      console.log(hourlyTotals += stores[j].stores[i]);
-      hourlyTotals += cookieStores[j].stores[i];
-    }
-    console.log(hourlyTotals);
-    return hourlyTotals;
-  }
+  return hoursOpen.map((hour, index) => {
+    return stores.reduce((acc, val) => {
+      return acc + val[index];
+    }, 0);
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -63,6 +57,15 @@ Write a function named salesData that uses forEach to iterate over the hourlySal
 
 const salesData = (hours, data) => {
   // Solution code here...
+  const result = [];
+  hours.forEach((hour, index) => {
+    const objectData = {
+      sales: `${data[index]} cookies`,
+      time: hour
+    };
+    result.push(objectData);
+  });
+  return result;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -88,6 +91,13 @@ const errands = [
 
 const howManyTreats = (arr) => {
   // Solution code here...
+  let result;
+  arr.forEach(object => {
+    if (object.items[1].name === 'Treats') {
+      result = object.items[1].quantity;
+    }
+  });
+  return result;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -201,13 +211,13 @@ describe('Testing challenge 1', () => {
   });
 });
 
-xdescribe('Testing challenge 2', () => {
+describe('Testing challenge 2', () => {
   test('It should add the hourly totals array', () => {
     expect(grandTotal(cookieStores)).toStrictEqual([88, 153, 252, 286, 139, 161, 145, 232, 276, 207, 161, 169]);
   });
 });
 
-xdescribe('Testing challenge 3', () => {
+describe('Testing challenge 3', () => {
   test('It should create an object of data for each store', () => {
     expect(salesData(hoursOpen, grandTotal(cookieStores))).toStrictEqual([
       { sales: '88 cookies', time: '9 a.m.' },
@@ -228,7 +238,7 @@ xdescribe('Testing challenge 3', () => {
   });
 });
 
-xdescribe('Testing challenge 4', () => {
+describe('Testing challenge 4', () => {
   test('It should return the number 24', () => {
     expect(howManyTreats(errands)).toStrictEqual(24);
   });
